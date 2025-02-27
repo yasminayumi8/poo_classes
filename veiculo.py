@@ -1,5 +1,5 @@
 class Veiculo:
-    def __init__(self, tipo, marca, modelo, cor,potente=True, fraco=False):
+    def __init__(self, marca, modelo, cor, tipo,potente=True, fraco=False):
         self.marca = marca
         self.modelo = modelo
         self.cor = cor
@@ -34,7 +34,9 @@ class Carro(Veiculo):
         self.frear = True
         self.mudar_direcao = False
         self.velocidade_normal = True
+
     def apresentar(self):
+        print("Carro")
         print(f'Marca:{self.marca}')
         print(f'Modelo:{self.modelo}')
         print(f'Cor:{self.cor}')
@@ -46,6 +48,7 @@ class Carro(Veiculo):
             print(f'o carro esta mudando de direcao')
         elif self.velocidade_normal:
             print(f'o carro esta velocidade normal')
+
     def acelerando(self):
         if not self.acelerar:
             print(f'o carro esta acelerando')
@@ -53,13 +56,19 @@ class Carro(Veiculo):
             self.velocidade_normal = False
             self.frear = False
             self.mudar_direcao = False
+
     def brecar(self):
         if not self.frear:
             print(f'o carro esta freando')
             self.frear = True
             self.velocidade_normal = False
             self.acelerar = False
+
+    def direcao(self):
+        if not self.mudar_direcao:
             self.mudar_direcao = True
+            print(f'o carro esta mudando de direcao')
+
     def normal(self):
         if not self.velocidade_normal:
             print(f'o carro esta velocidade normal')
@@ -67,6 +76,7 @@ class Carro(Veiculo):
             self.frear = False
             self.mudar_direcao = True
             self.acelerar = False
+
     def potencia(self):
         print(f'o carro é potente')
 
@@ -95,5 +105,6 @@ c1.normal()
 c1.acelerando()
 c1.normal()
 c1.brecar()
+c1.direcao()
 c1.potencia()
 print("-"* 20)
