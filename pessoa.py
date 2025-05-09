@@ -1,46 +1,86 @@
-
-
-
 class Pessoa:
     def __init__(self, nome, data_nascimento, codigo, estudando=True, trabalhando=False, salario=0):
-        self.nome = nome
-        self.data_nascimento = data_nascimento
-        self.codigo = codigo
-        self.estudando = estudando
-        self.trabalhando = trabalhando
-        self.salario = salario
+        self.__nome = nome
+        self.__data_nascimento = data_nascimento
+        self.__codigo = codigo
+        self._estudando = estudando
+        self._trabalhando = trabalhando
+        self._salario = salario
+
+    def get_nome(self):
+        return self.__nome
+
+    def get_data_nascimento(self):
+        return self.__data_nascimento
+
+    def get_codigo(self):
+        return self.__codigo
+
+    def is_estudando(self):
+        return self._estudando
+
+    def is_trabalhando(self):
+        return self._trabalhando
+
+    def get_salario(self):
+        return self._salario
+
+    def set_salario(self, valor):
+        if valor > 0:
+            self._salario = valor
+        else:
+            print("salario invalido")
 
     def apresentar(self):
-        print(f'Nome: {self.nome}')
-        print(f'Data de nascimento: {self.data_nascimento}')
-        print( f'Codigo: {self.codigo}')
-        print(f'Estudando: {self.estudando}')
-        print(f'Trabalhando: {self.trabalhando}')
-        if self.trabalhando:
-            print(f'Salario: {self.salario}')
+        print(f'Nome: {self.get_nome()}\n')
+        print(f'Data de nascimento: {self.__data_nascimento}')
+        print( f'Codigo: {self.__codigo}')
+        print(f'Estudando: {self._estudando}')
+        print(f'Trabalhando: {self._trabalhando}')
+        if self._trabalhando:
+            print(f'Salario: {self._salario}')
 
 
-    def estudar(self):
-        if not self.estudando:
-            self.estudando = True
-            print(f"{self.nome} começou a estudar!")
-        elif self.trabalhando and self.estudando:
+    # def estudar(self):
+    #     if not self._estudando:
+    #         self._estudando = True
+    #         print(f"{self.__nome} começou a estudar!")
+    #     elif self._trabalhando and self._estudando:
+    #
+    #         self._salario = self._salario + 300
+    #         print(
+    #             f"começou a estudar e aumentou o seu salario para"
+    #             f"R${self._salario:.2f}"
+    #         )
+    #     else:
+    #         print(f"{self.__nome} ja esta estudandot")
 
-            self.salario = self.salario + 300
-            print(
-                f"começou a estudar e aumentou o seu salario para"
-                f"R${self.salario:.2f}"
-            )
+    def set_trabalhar(self, status):
+        if self._trabalhando and status:
+            print("Ja esta trabalhando")
+        elif not self._trabalhando and not status:
+            print("Que vida boa")
+        elif not self._trabalhando and status:
+            self._trabalhando = status
+            self.set_salario(1000)
         else:
-            print(f"{self.nome} ja esta estudando")
+            self._trabalhando = status
+            self.set_salario(0)
 
-    def trabalhar(self):
-        if not self.trabalhando:
-            self.trabalhando = True
-            self.salario = 1000
-            print(f"{self.nome} começou a trabalhar")
-        else:
-            print(f"{self.nome} ja esta trabalhando")
+    def set_estudar(self, status):
+        self._estudando = status
+        if status:
+            self.set_salario(self.get_salario() +300)
+
+
+
+    # def trabalhar(self):
+    #     if not self._trabalhando:
+    #         self._trabalhando = True
+    #         self._salario = 1000
+    #         print(f"{self.__nome} começou a trabalhar")
+    #     else:
+    #         print(f"{self.__nome} ja esta trabalhando")
 
 class Bebe(Pessoa):
     def __init__(self, nome, data_nascimento,codigo):
@@ -49,9 +89,9 @@ class Bebe(Pessoa):
         self.chorando = True
         self.dormindo = False
     def apresentar(self):
-        print(f'Nome: {self.nome}')
-        print(f'Data de nascimento: {self.data_nascimento}')
-        print( f'Codigo: {self.codigo}')
+        print(f'Nome: {self.__nome}')
+        print(f'Data de nascimento: {self.__data_nascimento}')
+        print( f'Codigo: {self.__codigo}')
         if self.fome:
             print(f'Esta com fome')
         else:
@@ -97,33 +137,33 @@ class Bebe(Pessoa):
 
 
 p1 = Pessoa("lucas","23/09/1990","aghs")
-p1.estudar()
-p1.trabalhar()
+p1.is_estudando()
+p1.is_trabalhando()
 p1.apresentar()
-p1.estudar()
+p1.is_estudando()
 
 print("-"* 20)
 
 p2 = Pessoa("Yasmin","31/01/2008","ljah")
-p2.estudar()
+p2.is_estudando()
 p2.apresentar()
 print("-"* 20)
 
 p3 = Pessoa("Sandra","22/11/1975","kais")
-p3.estudar()
-p3.trabalhar()
+p3.is_estudando()
+p3.is_trabalhando()
 p3.apresentar()
-p3.estudar()
+p3.is_estudando()
 
 print("-"* 20)
 
 p4 = Pessoa("Carlos","11/09/1978","oash")
-p4.trabalhar()
+p4.is_trabalhando()
 p4.apresentar()
 print("-"* 20)
 
 p5 = Pessoa("Isabelly","28/09/2009","paos")
-p5.estudar()
+p5.is_estudando()
 p5.apresentar()
 print("-"* 20)
 

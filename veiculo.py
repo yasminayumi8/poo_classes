@@ -1,31 +1,44 @@
 class Veiculo:
-    def __init__(self, marca, modelo, cor, tipo,potente=True, fraco=False):
-        self.marca = marca
-        self.modelo = modelo
-        self.cor = cor
-        self.tipo = tipo
-        self.potente = potente
-        self.fraco = fraco
+    def __init__(self, marca, modelo, cor, tipo,forca = True):
+        self.__marca = marca
+        self.__modelo = modelo
+        self.__cor = cor
+        self.__tipo = tipo
+        self._forca = forca
+
+    def get_marca(self):
+        return self.__marca
+
+    def get_modelo(self):
+        return self.__modelo
+
+    def get_cor(self):
+        return self.__cor
+
+    def get_tipo(self):
+        return self.__tipo
+
+    def is_forca(self):
+        return self._forca
 
     def apresentar(self):
-        print(f'Marca:{self.marca}')
-        print(f'Tipo de veiculo:{self.tipo}')
-        print(f'Modelo:{self.modelo}')
-        print(f'Cor:{self.cor}')
-        print(f'É Potente:{self.potente}')
-        print(f'É Fraco:{self.fraco}')
-    def potencia(self):
-        if self.potente:
-            self.potente = True
-            print(f"O veiculo {self.modelo} é potente")
+        print(f'Marca:{self.get_marca()}')
+        print(f'Tipo de veiculo:{self.get_tipo()}')
+        print(f'Modelo:{self.get_modelo()}')
+        print(f'Cor:{self.get_cor()}')
+        print(f"A força é: {self.is_forca()}")
+
+    def set_forca(self,status):
+        if self._forca and status:
+            print("ele é potente")
+        elif not self._forca and not status:
+            print("ele não é potente")
+        elif not self._forca and status:
+            self._forca = status
+            print("ele ficou forte")
         else:
-           print(f'O veiculo {self.modelo} é fraco')
-    def fraqueza(self):
-        if not self.fraco:
-            self.fraco = True
-            print(f"O veiculo {self.modelo} é fraco")
-        else:
-            print(f"O veiculo {self.modelo} é potente")
+            self._forca = status
+            print("ele ficou Fraco")
 
 class Carro(Veiculo):
     def __init__(self, marca, modelo, cor, potente=True, fraco=False):
@@ -37,9 +50,9 @@ class Carro(Veiculo):
 
     def apresentar(self):
         print("Carro")
-        print(f'Marca:{self.marca}')
-        print(f'Modelo:{self.modelo}')
-        print(f'Cor:{self.cor}')
+        print(f'Marca:{self.get_marca()}')
+        print(f'Modelo:{self.get_modelo()}')
+        print(f'Cor:{self.get_cor()}')
         if self.acelerar:
             print(f'está acelerando')
         elif self.frear:
@@ -77,34 +90,31 @@ class Carro(Veiculo):
             self.mudar_direcao = True
             self.acelerar = False
 
-    def potencia(self):
-        print(f'o carro é potente')
-
 
 
 
 v1 = Veiculo( "carro",  "Aston Martin", "One-77 ", "cinza ")
+v1._forca = True
+v1.set_forca(True)
 v1.apresentar()
-v1.potencia()
 print("-"* 20)
 
 v2 = Veiculo( "caminhão", "Volvo", "Volvo VM", "preto")
+v2.set_forca  (False)
 v2.apresentar()
-v2.potencia()
 print("-"* 20)
 
 v3 = Veiculo( "moto", "Shineray", "Shineray 250F", "branco")
+v3._forca = True
+v3.set_forca(True)
 v3.apresentar()
-v3.fraqueza()
-
 print("-"* 20)
 
 c1 = Carro("Hatch", "Fiat", "branco")
 c1.apresentar()
 c1.normal()
 c1.acelerando()
-c1.normal()
 c1.brecar()
 c1.direcao()
-c1.potencia()
+
 print("-"* 20)
